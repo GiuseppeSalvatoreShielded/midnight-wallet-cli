@@ -3,7 +3,7 @@ import type { NetworkId } from '@midnight-ntwrk/wallet-sdk-abstractions';
 /**
  * Supported environment names for the CLI
  */
-export type Environment = 'preprod' | 'preview' | 'qanet' | 'dev' | 'undeployed';
+export type Environment = 'mainnet' | 'preprod' | 'preview' | 'qanet' | 'dev' | 'undeployed';
 
 /**
  * Supported seed input types

@@ -1,4 +1,4 @@
-import * as ledger from '@midnight-ntwrk/ledger-v7';
+import * as ledger from '@midnight-ntwrk/ledger-v8';
 import { DustWallet } from '@midnight-ntwrk/wallet-sdk-dust-wallet';
 import { WalletFacade } from '@midnight-ntwrk/wallet-sdk-facade';
 import { HDWallet, Roles } from '@midnight-ntwrk/wallet-sdk-hd';
@@ -68,7 +68,6 @@ export async function initializeWallet(seed: Uint8Array, envConfig: EnvironmentC
     provingServerUrl: new URL(envConfig.provingServerUrl),
     relayURL: new URL(envConfig.nodeWsUrl),
     costParameters: {
-      additionalFeeOverhead: 300_000_000_000_000_000n,
       feeBlocksMargin: 5,
     },
     txHistoryStorage: new InMemoryTransactionHistoryStorage(),
