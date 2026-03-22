@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Text } from 'ink';
 import type { UtxoWithMeta } from '@midnight-ntwrk/wallet-sdk-facade';
-import { formatBalance } from '../../../utils/balance.js';
+import { formatBalance, formatDustBalance } from '../../../utils/balance.js';
 
 interface Props {
   selectedUtxos: UtxoWithMeta[];
@@ -42,7 +42,7 @@ export const RegistrationConfirm: React.FC<Props> = ({ selectedUtxos, dustReceiv
         {estimatedFee !== null && (
           <Box marginTop={1}>
             <Text dimColor>Estimated fee: </Text>
-            <Text bold>{formatBalance(estimatedFee)}</Text>
+            <Text bold>{formatDustBalance(estimatedFee)}</Text>
             <Text dimColor> DUST</Text>
           </Box>
         )}

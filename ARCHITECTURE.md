@@ -367,13 +367,17 @@ state.dust.dustAddress;
 
 ### Balance Formatting
 
-Balances are stored as bigint with 6 decimal places. The formatter abbreviates large values:
+- **NIGHT/STAR**: 1 NIGHT = 10^6 STAR. NIGHT is a special case of unshielded token; use `formatBalance(balance)` for NIGHT values (default denomination).
+- **DUST/SPECK**: 1 DUST = 10^15 SPECK. Use `formatDustBalance(speckBalance)` for dust balance and fees.
+- **Other tokens**: Custom shielded and unshielded tokens have no official unit; their denomination is unknown. The formatter displays the raw value as-is.
+
+Dust balance and fees are expressed in SPECK and require the 10^15 conversion. The formatter abbreviates large values:
 
 ```typescript
-function formatBalance(balance: bigint): string {
-  const denomination = BigInt(10 ** 6); // 6 decimal places
-  const value = balance / denomination;
-  const fractionalPart = balance % denomination;
+function formatBalance(balance: bigint, denomination?: bigint): string {
+  const denom = denomination ?? BigInt(10 ** 6); // NIGHT: 6 decimal places
+  const value = balance / denom;
+  const fractionalPart = balance % denom;
 
   // Abbreviate large values
   if (value >= 1_000_000_000_000n) return `${value / trillion}T`; // Trillions
