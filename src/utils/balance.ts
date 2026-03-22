@@ -1,5 +1,14 @@
-export function formatBalance(balance: bigint): string {
-  const denomination = BigInt(10 ** 6);
+/** SPECK per DUST: 1 DUST = 10^15 SPECK (Midnight glossary) */
+export const DUST_DENOMINATION = BigInt(10 ** 15);
+
+/** STAR per NIGHT: 1 NIGHT = 10^6 STAR (Midnight glossary) */
+const NIGHT_DENOMINATION = BigInt(10 ** 6);
+
+/**
+ * Format a balance for display. Uses NIGHT/STAR denomination (10^6) by default.
+ * For DUST (SPECK values), use formatDustBalance instead.
+ */
+export function formatBalance(balance: bigint, denomination: bigint = NIGHT_DENOMINATION): string {
   const value = balance / denomination;
   const fractionalPart = balance % denomination;
 
@@ -57,4 +66,9 @@ export function formatBalance(balance: bigint): string {
   }
 
   return result;
+}
+
+/** Format dust balance (SPECK → DUST) for display. 1 DUST = 10^15 SPECK. */
+export function formatDustBalance(speckBalance: bigint): string {
+  return formatBalance(speckBalance, DUST_DENOMINATION);
 }

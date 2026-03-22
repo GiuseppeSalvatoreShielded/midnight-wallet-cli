@@ -3,7 +3,7 @@ import { Box, Text } from 'ink';
 import type { FacadeState } from '@midnight-ntwrk/wallet-sdk-facade';
 import { DustAddress, ShieldedAddress, UnshieldedAddress } from '@midnight-ntwrk/wallet-sdk-address-format';
 import { NetworkId } from '@midnight-ntwrk/wallet-sdk-abstractions';
-import { formatBalance } from '../../utils/balance.js';
+import { formatBalance, formatDustBalance } from '../../utils/balance.js';
 import { formatTimeRemaining } from '../../utils/display.js';
 
 interface Props {
@@ -177,7 +177,7 @@ export const WalletStateView: React.FC<Props> = ({ state, networkId }) => {
 
           <Box marginTop={1}>
             <Text dimColor>Balance (DUST): </Text>
-            <Text bold>{formatBalance(state.dust.balance(new Date()))}</Text>
+            <Text bold>{formatDustBalance(state.dust.balance(new Date()))}</Text>
           </Box>
 
           <Box marginTop={1}>
@@ -199,8 +199,8 @@ export const WalletStateView: React.FC<Props> = ({ state, networkId }) => {
                   <Box key={idx} marginLeft={2} flexDirection="column">
                     <Text>
                       <Text dimColor>· Coin {idx + 1}: </Text>
-                      <Text bold>{coinInfo.generatedNow.toString()}</Text>
-                      <Text dimColor> / {coinInfo.maxCap.toString()} max</Text>
+                      <Text bold>{formatDustBalance(coinInfo.generatedNow)}</Text>
+                      <Text dimColor> / {formatDustBalance(coinInfo.maxCap)} max</Text>
                       {!coinInfo.dtime && <Text color={isComplete ? 'green' : 'cyan'}> ({timeRemaining})</Text>}
                     </Text>
                     {coinInfo.dtime && (
